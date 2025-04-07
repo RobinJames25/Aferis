@@ -34,7 +34,7 @@ export default function Home() {
                 </Box>
                 <Link
                     as={RouterLink}
-                    to={'/profile'}
+                    to={'/signin'}
                     fontWeight='bold'
                     color='blue.400'
                 >

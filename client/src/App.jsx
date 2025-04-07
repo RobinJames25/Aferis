@@ -16,13 +16,16 @@ export default function App() {
     <UserProvider>
       <ChakraProvider>
         <BrowserRouter>
-          <NavBar />
           <Toaster position='bottom-right' />
           <Routes>
+            <Route 
+              path='/signin' 
+              element={<><NavBar /><SignIn /></>} 
+            />
+            <Route 
+              path='/signup' 
+              element={<><NavBar /><SignUp /></>} />
             <Route path='/' element={<Home />} />
-            <Route path='/signin' element={<SignIn />} />
-            <Route path='/signup' element={<SignUp />} />
-
             <Route element={<PrivateRoute />}>
               <Route path='/profile' element={<Profile />} />
               <Route path='/store' element={<Store />} />

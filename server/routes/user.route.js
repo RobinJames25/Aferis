@@ -1,4 +1,5 @@
 import express from 'express';
+import { verifyToken } from '../middleware/auth.middleware.js';
 
 import {
     getUser,
@@ -8,8 +9,8 @@ import {
 
 const router = express.Router();
 
-router.get('/:id', getUser);
-router.patch('/update/:id', updateUser);
-router.delete('/delete/:id', deleteUser);
+router.get('/:id', verifyToken, getUser);
+router.patch('/update/:id', verifyToken, updateUser);
+router.delete('/delete/:id', verifyToken, deleteUser);
 
 export default router;

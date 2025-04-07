@@ -1,88 +1,219 @@
 import 'dotenv/config';
-import { db } from "./libs/dbConnect.js";
+import mongoose from 'mongoose';
+import User from './models/user.model.js';
+import Product from './models/product.model.js';
 
 const users = [
     {
-        username: 'nathan121',
-        email: 'nathan@mail.com',
+        username: 'thesith254',
+        email: 'thesith254@gmail.com',
         password: '$2b$10$vD5yRWdxLp1j6riuSi/Ozu71x145viXeGC7AHT5R0WcycGalmYTae',
         avatar:
           'https://g.codewithnathan.com/default-user.png',
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
+        role: 'admin',
     },
     {
-        username: 'jane78',
-        email: 'jane@mail.com',
+        username: 'kali123',
+        email: 'kali@gmail.com',
         password: '$2b$10$vD5yRWdxLp1j6riuSi/Ozu71x145viXeGC7AHT5R0WcycGalmYTae',
         avatar:
         'https://g.codewithnathan.com/default-user.png',
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
+        role: 'admin'
     }
 ];
 
 const products = [
     {
-        name: 'Nike Air Max 270',
-        description: 'A stylish and comfortable running shoe with Air cushioning.',
-        price: 150,
-        category: 'Running Shoes',
-        brand: 'Nike',
-        stock: 20,
-        image: 'https://example.com/nike-air-max-270.jpg',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
+        name: "aj1",
+        brand: "Nike",
+        category: "Basketball",
+        price: 16295,
+        originalPrice: 18295,
+        discountPercentage: 10.93,
+        description: "Experience lightweight comfort and explosive energy with the Air Jordan XXXVII Low PF.",
+        image: "/images/aj1.jpg",
+        countInStock: 15,
+        rating: 4.8,
+        numReviews: 12,
+        reviews: [],
+        sizes: [7, 8, 9, 10, 11],
+        colors: ["White", "Black", "Red"]
     },
     {
-        name: 'Adidas Ultraboost 21',
-        description: 'Premium running shoes featuring Boost technology for extra comfort.',
-        price: 180,
-        category: 'Running Shoes',
-        brand: 'Adidas',
-        stock: 15,
-        image: 'https://example.com/adidas-ultraboost-21.jpg',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
+        name: "aj2",
+        brand: "Nike",
+        category: "Basketball",
+        price: 16295,
+        originalPrice: 18295,
+        discountPercentage: 10.93,
+        description: "Experience lightweight comfort and explosive energy with the Air Jordan XXXVII Low PF.",
+        image: "/images/aj2.jpg",
+        countInStock: 15,
+        rating: 4.8,
+        numReviews: 12,
+        reviews: [],
+        sizes: [7, 8, 9, 10, 11],
+        colors: ["White", "Black", "Red"]
     },
     {
-        name: 'Puma RS-X',
-        description: 'Retro-inspired sneakers with modern comfort and style.',
-        price: 130,
-        category: 'Casual Sneakers',
-        brand: 'Puma',
-        stock: 25,
-        image: 'https://example.com/puma-rs-x.jpg',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
+        name: "aj3",
+        brand: "Nike",
+        category: "Basketball",
+        price: 16295,
+        originalPrice: 18295,
+        discountPercentage: 10.93,
+        description: "Experience lightweight comfort and explosive energy with the Air Jordan XXXVII Low PF.",
+        image: "/images/aj3.jpg",
+        countInStock: 15,
+        rating: 4.8,
+        numReviews: 12,
+        reviews: [],
+        sizes: [7, 8, 9, 10, 11],
+        colors: ["White", "Black", "Red"]
     },
     {
-        name: 'Converse Chuck Taylor All Star',
-        description: 'Classic canvas sneakers with timeless appeal.',
-        price: 60,
-        category: 'Casual Sneakers',
-        brand: 'Converse',
-        stock: 30,
-        image: 'https://example.com/converse-chuck-taylor.jpg',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
+        name: "aj4",
+        brand: "Nike",
+        category: "Basketball",
+        price: 16295,
+        originalPrice: 18295,
+        discountPercentage: 10.93,
+        description: "Experience lightweight comfort and explosive energy with the Air Jordan XXXVII Low PF.",
+        image: "/images/aj4.jpg",
+        countInStock: 15,
+        rating: 4.8,
+        numReviews: 12,
+        reviews: [],
+        sizes: [7, 8, 9, 10, 11],
+        colors: ["White", "Black", "Red"]
+    },
+    {
+        name: "aj5",
+        brand: "Nike",
+        category: "Basketball",
+        price: 16295,
+        originalPrice: 18295,
+        discountPercentage: 10.93,
+        description: "Experience lightweight comfort and explosive energy with the Air Jordan XXXVII Low PF.",
+        image: "/images/aj5.jpg",
+        countInStock: 15,
+        rating: 4.8,
+        numReviews: 12,
+        reviews: [],
+        sizes: [7, 8, 9, 10, 11],
+        colors: ["White", "Black", "Red"]
+    },
+    {
+        name: "aj6",
+        brand: "Nike",
+        category: "Basketball",
+        price: 16295,
+        originalPrice: 18295,
+        discountPercentage: 10.93,
+        description: "Experience lightweight comfort and explosive energy with the Air Jordan XXXVII Low PF.",
+        image: "/images/aj6.jpg",
+        countInStock: 15,
+        rating: 4.8,
+        numReviews: 12,
+        reviews: [],
+        sizes: [7, 8, 9, 10, 11],
+        colors: ["White", "Black", "Red"]
+    },
+    {
+        name: "aj7",
+        brand: "Nike",
+        category: "Basketball",
+        price: 16295,
+        originalPrice: 18295,
+        discountPercentage: 10.93,
+        description: "Experience lightweight comfort and explosive energy with the Air Jordan XXXVII Low PF.",
+        image: "/images/aj7.jpg",
+        countInStock: 15,
+        rating: 4.8,
+        numReviews: 12,
+        reviews: [],
+        sizes: [7, 8, 9, 10, 11],
+        colors: ["White", "Black", "Red"]
+    },
+    {
+        name: "aj8",
+        brand: "Nike",
+        category: "Basketball",
+        price: 16295,
+        originalPrice: 18295,
+        discountPercentage: 10.93,
+        description: "Experience lightweight comfort and explosive energy with the Air Jordan XXXVII Low PF.",
+        image: "/images/aj8.jpg",
+        countInStock: 15,
+        rating: 4.8,
+        numReviews: 12,
+        reviews: [],
+        sizes: [7, 8, 9, 10, 11],
+        colors: ["White", "Black", "Red"]
+    },
+    {
+        name: "aj9",
+        brand: "Nike",
+        category: "Basketball",
+        price: 16295,
+        originalPrice: 18295,
+        discountPercentage: 10.93,
+        description: "Experience lightweight comfort and explosive energy with the Air Jordan XXXVII Low PF.",
+        image: "/images/aj9.jpg",
+        countInStock: 15,
+        rating: 4.8,
+        numReviews: 12,
+        reviews: [],
+        sizes: [7, 8, 9, 10, 11],
+        colors: ["White", "Black", "Red"]
+    },
+    {
+        name: "aj10",
+        brand: "Nike",
+        category: "Basketball",
+        price: 16295,
+        originalPrice: 18295,
+        discountPercentage: 10.93,
+        description: "Experience lightweight comfort and explosive energy with the Air Jordan XXXVII Low PF.",
+        image: "/images/aj10.jpg",
+        countInStock: 15,
+        rating: 4.8,
+        numReviews: 12,
+        reviews: [],
+        sizes: [7, 8, 9, 10, 11],
+        colors: ["White", "Black", "Red"]
     }
 ];
 
 
-try {
-    let collection = await db.collection('users');
-    console.log('[seed', 'Seeding Users...');
-    const result = await collection.insertMany(users);
-    console.log(result.insertedIds);
-    console.log('[seed]', 'Seeding Users Done');
-
-    collection = db.collection('products');
-    console.log('[seed]', 'Seeding Products...');
-    await collection.insertMany(products);
-    console.log('[seed]', 'Seeding Products Done');
-
-    console.log('[seed]', 'All Done');
-} catch (error) {
-    console.log('[seed]', 'Error: ', error)
-}
+async function seedDatabase() {
+    try {
+      // Connecting to the database
+      await mongoose.connect(process.env.MONGODB_URI, {
+        dbName: process.env.MONGODB_DATABASE,
+      });
+  
+      // Seed the Users
+      console.log('[seed] Seeding Users...');
+      await User.insertMany(users);
+      console.log('[seed] Seeding Users Done');
+  
+      // Seed the Products
+      console.log('[seed] Seeding Products...');
+      await Product.insertMany(products);
+      console.log('[seed] Seeding Products Done');
+      
+      console.log('[seed] All Done');
+    } catch (error) {
+      console.error('[seed] Error:', error);
+    } finally {
+      // Disconnect after seeding
+      mongoose.disconnect();
+    }
+  }
+  
+  seedDatabase();

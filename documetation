@@ -253,3 +253,31 @@ Database: Use MongoDB Atlas
 ✅ Implement Product Filters (Size, Brand, Price)
 ✅ Enable Discount Coupons
 ✅ Integrate Email Notifications
+
+
+backend/
+├── config/            # DB config & other environment-based setup
+│   └── db.js
+├── controllers/       # Business logic for routes
+│   ├── authController.js
+│   ├── productController.js
+│   ├── orderController.js
+│   └── userController.js
+├── middleware/        # Custom middleware (auth, errorHandler)
+│   ├── authMiddleware.js
+│   └── errorMiddleware.js
+├── models/            # Mongoose schemas
+│   ├── User.js
+│   ├── Product.js
+│   ├── Order.js
+│   └── Review.js
+├── routes/            # API routes
+│   ├── authRoutes.js
+│   ├── productRoutes.js
+│   ├── orderRoutes.js
+│   └── userRoutes.js
+├── uploads/           # Uploaded images (optional)
+├── utils/             # Helper functions (email, validators, etc.)
+├── .env
+├── server.js
+└── package.json
